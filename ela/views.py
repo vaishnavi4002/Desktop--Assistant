@@ -34,10 +34,33 @@ def speak(text):
     # Convert text to speech
     engine.say(text)
     engine.runAndWait()
+
+def wishMe():
+    hour = int(datetime.datetime.now().hour)
+    if hour>=0 and hour<12:
+        speak("Good Morning!")
+
+    elif hour>=12 and hour<18:
+        speak("Good Afternoon!")   
+
+    else:
+        speak("Good Evening!")  
+
+    speak("I am ela. Please tell me how may I help you")
     
+def home(request):
+    return render(request, 'ela/home.html')
+
+def login_page(request):
+    return render(request, 'ela/login.html')
+
+def register_page(request):
+    return render(request, 'ela/register.html')
 
 def index(request):
+    
     if request.method == 'POST' and 'task' in request.POST:
+        
         task = request.POST['task']
         if task == 'perform_task':
             return perform_task(request)  # Call perform_task function
@@ -64,10 +87,10 @@ def process_speech():
 
 
 def perform_task(request): 
-    
+        
         query = process_speech().lower()
         print(query)
-    
+        
     # Logic for executing tasks based on query
         if 'wikipedia' in query:
             speak('Searching Wikipedia...')
@@ -92,7 +115,7 @@ def perform_task(request):
               exit()
 
         elif 'play music' in query:
-            music_dir = 'song'
+            music_dir = './ela/song'
             songs = os.listdir(music_dir)
             print(songs)    
             os.startfile(os.path.join(music_dir, songs[0]))
@@ -105,14 +128,11 @@ def perform_task(request):
             codePath = r"C:\Users\admin\Desktop\python project\assistant.py"
             os.startfile(codePath)
         
-        #    elif 'plot' in query:
-        #     with open('assistant.py') as f:
-        #      code = compile(f.read(), 'assistant.py', 'exec')
-        #      exec(code)
+       
         elif 'joke' in query:
             speak(pyjokes.get_joke())
         elif "who made you" in query or "who created you" in query:
-            speak("I have been created by sakshi , vaishnavi and arati.")
+            speak("I have been created by  vaishnavi and arati.")
        
         elif 'lock window' in query:
                 # speak("locking the device")
@@ -125,8 +145,6 @@ def perform_task(request):
            if shutdown == "yes":
              os.system("shutdown /s /t 1")
 
-           
-        
         elif "write a note" in query:
             speak("What should i write, sir")
             note = process_speech()
@@ -161,22 +179,22 @@ def perform_task(request):
         #     except Exception as e:
         #         print(e)
         #         speak("I am not able to send this email")
-        # elif "google search" in query:
-        #      from SearchNow import searchGoogle
-        #      searchGoogle(query)
-        # elif "youtube search" in query:
-        #     from SearchNow import searchYoutube
-        #     searchYoutube(query)
-        # elif " wikipedia search" in query:
-        #     from SearchNow import searchWikipedia
-        #     searchWikipedia(query)
-        # elif "temperature" in query:
-        #     search = "temperature in Pune"
-        #     url = f"https://www.google.com/search?q={search}"
-        #     r  = requests.get(url)
-        #     data = BeautifulSoup(r.text,"html.parser")
-        #     temp = data.find("div", class_ = "BNeawe").text
-        #     speak(f"current{search} is {temp}")
+        elif "google search" in query:
+             from .SearchNow import searchGoogle
+             searchGoogle(query)
+        elif "youtube search" in query:
+            from .SearchNow import searchYoutube
+            searchYoutube(query)
+        elif " wikipedia search" in query:
+            from .SearchNow import searchWikipedia
+            searchWikipedia(query)
+        elif "temperature" in query:
+            search = "temperature in Pune"
+            url = f"https://www.google.com/search?q={search}"
+            r  = requests.get(url)
+            data = BeautifulSoup(r.text,"html.parser")
+            temp = data.find("div", class_ = "BNeawe").text
+            speak(f"current{search} is {temp}")
         # elif "weather" in query:
         #    search = "weather in Pune"
         #    url = f"https://www.google.com/search?q={search}"
@@ -184,12 +202,12 @@ def perform_task(request):
         #    data = BeautifulSoup(r.text, "html.parser")
         #    weather_condition = data.find("div", class_="BNeawe").text
         #    speak(f"The current {search} is {weather_condition}")
-        # elif "open" in query:
-        #      from Dictapp import openappweb
-        #      openappweb(query)
-        # elif "close" in query:
-        #      from Dictapp import closeappweb
-        #      closeappweb(query)
+        elif "open" in query:
+             from Dictapp import openappweb
+             openappweb(query)
+        elif "close" in query:
+             from Dictapp import closeappweb
+             closeappweb(query)
         # elif "set an alarm" in query:
         #     print("input time example:- 10 hr:10 min")
         #     speak("Set the time")
@@ -258,7 +276,7 @@ def perform_task(request):
              else:
                 speak('Have a good day !,')
              exit()
-        return render(request, 'ela/results.html', {'query': 'Task performed successfully'})
+        return redirect('/start')
     
     
 

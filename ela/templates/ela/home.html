@@ -1,0 +1,89 @@
+{% extends "ela\_base.html" %}
+
+{% block content %}
+
+<div class="bg-cover bg-center h-screen bg-customColor">
+  <nav class="t border-gray-200 py-2.5 bg-transparent text-2xl ">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+        <a href="#" class="flex items-center">
+            <img src="https://www.svgrepo.com/show/499962/music.svg" class="h-6 mr-3 sm:h-9" alt="Landwind Logo">
+            <span class="self-center text-xl font-semibold whitespace-nowrap text-white">ELA</span>
+        </a>
+        <div class="flex items-center lg:order-2">
+            <div class="hidden mt-2 mr-4 sm:inline-block">
+                <span></span>
+            </div>
+
+            
+				<span class="sr-only">Open main menu</span>
+				<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd"
+						d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+						clip-rule="evenodd"></path>
+				</svg>
+				<svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd"
+						d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+						clip-rule="evenodd"></path>
+				</svg>
+			</button>
+        </div>
+        <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+            <ul class="flex flex-col  mt-4 font-medium lg:flex-row lg:space-x-12 lg:mt-0 ">
+                <li>
+                    <a href="/"
+                        class="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-white lg:p-0 dark:text-white"
+                        aria-current="page">Home</a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">About  Ela</a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Support us</a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Features</a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Contact Us</a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Account</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="  mt-20 main-text text-white  text-2xl text-center w-full flex flex-col md:flex-row justify-center items-center">
+  <div class="w-full md:w-1/2 flex flex-col items-center mt-10">
+    <h1 class="pt-10 font-serif text-3xl font-extrabold">Ela - The Voice Assistant</h1>
+    <h2 class="pt-10">Your voice is enough to operate your computer<br>Take control of your desktop with Ela</h2>
+    <div class="pt-9 w-60 mt-10">
+      <a href="/start"><button  type="button" class=" text-2xl text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full  px-10 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">GET STARTED</button></a>
+    </div>
+  </div>
+  <div class="w-full md:w-1/2 flex justify-center">
+    <div class="image mt-15 ">
+      
+      <img class=" rounded-lg" style="width: 30rem;" src="https://img.freepik.com/free-photo/metaverse-concept-collage-design_23-2149419859.jpg?size=626&ext=jpg&ga=GA1.1.1907280627.1713890448&semt=ais" alt="">
+    </div>
+  </div>
+</div>
+
+
+
+
+      
+  </div>
+  
+    
+  
+
+  
+{% endblock content %}

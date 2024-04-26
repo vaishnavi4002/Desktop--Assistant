@@ -19,6 +19,9 @@ from django.urls import path
 from ela.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('' , index, name='index'),
+    path('' , home, name='home'),
+    path('login/' , login_page, name='login'),
+    path('register' , register_page, name='register'),
+    path('start/' , index, name='index'),
     path('perform_task/', perform_task, name='perform_task'),
 ]
