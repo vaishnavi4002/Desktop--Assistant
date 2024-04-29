@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="bg-cover bg-center h-screen bg-customColor">
-  <nav class="t border-gray-200 py-2.5 bg-transparent text-2xl ">
+  <nav class=" border-gray-200 py-2.5 bg-transparent text-2xl ">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
         <a href="#" class="flex items-center">
             <img src="https://www.svgrepo.com/show/499962/music.svg" class="h-6 mr-3 sm:h-9" alt="Landwind Logo">
@@ -36,40 +36,40 @@
                         aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">About  Ela</a>
+                    <a href="/aboutEla"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">About  Ela</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Support us</a>
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Support us</a>
+                </li>
+                <li>
+                    <a href="/Features"
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Features</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Features</a>
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Contact Us</a>
                 </li>
                 <li>
                     <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Contact Us</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Account</a>
+                        class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Account</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="flex flex-col md:flex-row">
+<div class="flex flex-col md:flex-row" >
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen md:w-1/2">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="flex flex-col items-center justify-center ml-15 px-8 py-8 mx-auto md:h-screen lg:py-0 " style="width: 500px;">
     
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8"  >
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        login in to your account
+                        SIGN IN
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="post">
+                    <form class="space-y-4 md:space-y-6" method="post">
                         {% csrf_token %}
                         <div>
                             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
@@ -81,38 +81,37 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                  <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
-                                </div>
-                                <div class="ml-3 text-sm">
+                                <!-- <div class="flex items-center h-5">
+                                  <input id="remember" aria-describedby="remember" type="checkbox" class="w-5 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+                                </div> -->
+                                <!-- <div class="ml-3 text-sm">
                                   <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
-                                </div>
+                                </div> -->
                             </div>
                             <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                         </div>
+                        <br>
                         <button type="submit" class="w-full text-white bg-blue-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">login in</button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Don’t have an account yet? <a href="/register_page/" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                            Don’t have an account yet? <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                         </p>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="flex justify-center md:w-1/2">
-      <div class="image mt-15">
-        <img class="rounded-lg" style="width: 30rem;" src="https://img.freepik.com/free-photo/metaverse-concept-collage-design_23-2149419859.jpg?size=626&ext=jpg&ga=GA1.1.1907280627.1713890448&semt=ais" alt="">
+    <div class="w-full md:w-1/2 flex justify-center">
+        <div class="image mt-20 ">
+          
+          <img class=" rounded-lg" style="width: 30rem;" src="https://img.freepik.com/free-photo/metaverse-concept-collage-design_23-2149419859.jpg?size=626&ext=jpg&ga=GA1.1.1907280627.1713890448&semt=ais" alt="">
+        </div>
       </div>
     </div>
-  </div>
-
-
-
-
+  
       
   </div>
   
-    
+
   
 
   

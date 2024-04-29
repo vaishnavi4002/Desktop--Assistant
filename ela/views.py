@@ -12,10 +12,12 @@ import ctypes
 from ecapture import ecapture as ec
 import requests
 from bs4 import BeautifulSoup
-
+from django.contrib import messages
 from django.shortcuts import render,redirect
-
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
+import pyautogui
+from .models import QueryHistory
 recognizer = sr.Recognizer()
 
 # engine = pyttsx3.init('sapi5')
@@ -51,20 +53,83 @@ def wishMe():
 def home(request):
     return render(request, 'ela/home.html')
 
+def aboutEla(request):
+    return render(request, 'ela/aboutEla.html')
+
+def Features(request):
+    return render(request, 'ela/Features.html')
+
 def login_page(request):
+    if request.method =='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        
+
+        user= User.objects.filter(
+            username=username
+        )
+        if not user.exists():
+            messages.error(request, "Username is Invalid.")
+            redirect('/login')
+        
+        user=authenticate(username=username,password=password)
+
+        if user is None:
+            messages.error(request, "Password is Invalid.")
+            redirect('/login')
+        else:
+            login(request, user)
+            return redirect('/start')
+
     return render(request, 'ela/login.html')
 
 def register_page(request):
+    if request.method =='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        
+
+        user= User.objects.filter(
+            username=username
+        )
+        if user.exists():
+            messages.error(request, "Username Already Taken.")
+            return redirect('/register')
+        user= User.objects.create(
+            username=username
+        )
+        user.set_password(password)
+        user.save()
+        messages.info(request, "Account Created Successfully.")
+        return redirect('/login')
+
     return render(request, 'ela/register.html')
 
 def index(request):
+    user = request.user
     
+    query_history = QueryHistory.objects.filter(user=user)
+
     if request.method == 'POST' and 'task' in request.POST:
-        
         task = request.POST['task']
         if task == 'perform_task':
-            return perform_task(request)  # Call perform_task function
-    return render(request, 'ela/index.html')
+            return perform_task(request)
+        
+
+    if query_history.exists():
+        return render(request, 'ela/index.html', {'query_history': query_history})
+    else:
+        return render(request, 'ela/index.html', {'query_history': []})
+
+
+def alarm(query):
+    timehere = open("Alarmtext.txt","a")
+    timehere.write(query)
+    timehere.close()
+    try:
+        os.system("start python alarm.py")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
 
 def process_speech():
     with sr.Microphone() as source:
@@ -78,6 +143,7 @@ def process_speech():
         query = recognizer.recognize_google(audio, language="en-in")
         # print(query)
         # speak(query)
+        
         return query
     except Exception as e:
         speak("sorry sir i did not get that")
@@ -89,7 +155,11 @@ def process_speech():
 def perform_task(request): 
         
         query = process_speech().lower()
+        user = request.user 
+        query_history = QueryHistory.objects.create(user=user, query_text=query)
+        query_history.save()
         print(query)
+        
         
     # Logic for executing tasks based on query
         if 'wikipedia' in query:
@@ -195,80 +265,80 @@ def perform_task(request):
             data = BeautifulSoup(r.text,"html.parser")
             temp = data.find("div", class_ = "BNeawe").text
             speak(f"current{search} is {temp}")
-        # elif "weather" in query:
-        #    search = "weather in Pune"
-        #    url = f"https://www.google.com/search?q={search}"
-        #    r = requests.get(url)
-        #    data = BeautifulSoup(r.text, "html.parser")
-        #    weather_condition = data.find("div", class_="BNeawe").text
-        #    speak(f"The current {search} is {weather_condition}")
+        elif "weather" in query:
+           search = "weather in Pune"
+           url = f"https://www.google.com/search?q={search}"
+           r = requests.get(url)
+           data = BeautifulSoup(r.text, "html.parser")
+           weather_condition = data.find("div", class_="BNeawe").text
+           speak(f"The current {search} is {weather_condition}")
         elif "open" in query:
-             from Dictapp import openappweb
+             from .Dictapp import openappweb
              openappweb(query)
         elif "close" in query:
-             from Dictapp import closeappweb
+             from .Dictapp import closeappweb
              closeappweb(query)
-        # elif "set an alarm" in query:
-        #     print("input time example:- 10 hr:10 min")
-        #     speak("Set the time")
-        #     a = input("Please tell the time :- ")
-        #     alarm(a)
-        #     speak("Done,sir")
+        elif "set an alarm" in query:
+            print("input time example:- 10 hr:10 min")
+            speak("Set the time")
+            a = input("Please tell the time :- ")
+            alarm(a)
+            speak("Done,sir")
         
-        # elif "pause" in query:
-        #     pyautogui.press("k")
-        #     speak("video paused")
-        # elif "play" in query:
-        #     pyautogui.press("k")
-        #     speak("video played")
-        # elif "mute" in query:
-        #     pyautogui.press("m")
-        #     speak("video muted")
+        elif "pause" in query:
+            pyautogui.press("k")
+            speak("video paused")
+        elif "play" in query:
+            pyautogui.press("k")
+            speak("video played")
+        elif "mute" in query:
+            pyautogui.press("m")
+            speak("video muted")
 
-        # elif "volume up" in query:
-        #     from keyboard import volumeup
-        #     speak("Turning volume up,sir")
-        #     volumeup()
-        # elif "volume down" in query:
-        #     from keyboard import volumedown
-        #     speak("Turning volume down, sir")
-        #     volumedown()
+        elif "volume up" in query:
+            from .keyboard import volumeup
+            speak("Turning volume up,sir")
+            volumeup()
+        elif "volume down" in query:
+            from .keyboard import volumedown
+            speak("Turning volume down, sir")
+            volumedown()
         
-        # elif "remember that" in query:
-        #   rememberMessage = query.replace("remember that","")
-        #   rememberMessage = query.replace("ela","")
-        #   speak("You told me to remember that"+rememberMessage)
-        #   remember = open("Remember.txt","a")
-        #   remember.write(rememberMessage)
-        #   remember.close()
-        # elif "what do you remember" in query:
-        #   remember = open("Remember.txt","r")
-        #   speak("You told me to remember that" + remember.read())
+        elif "remember that" in query:
+          rememberMessage = query.replace("remember that","")
+          rememberMessage = query.replace("ela","")
+          speak("You told me to remember that"+rememberMessage)
+          remember = open("Remember.txt","a")
+          remember.write(rememberMessage)
+          remember.close()
+        elif "what do you remember" in query:
+          remember = open("Remember.txt","r")
+          speak("You told me to remember that" + remember.read())
         
-        # elif "news" in query:
-        #   from NewsRead import latestnews
-        #   latestnews()
+        elif "news" in query:
+          from .NewsRead import latestnews
+          latestnews()
 
-        # elif "calculate" in query:
-        #   from Calculatenumbers import WolfRamAlpha
-        #   from Calculatenumbers import Calc
-        #   query = query.replace("calculate","")
-        #   query = query.replace("ela","")
-        #   Calc(query)
+        elif "calculate" in query:
+          from .Calculatenumbers import WolfRamAlpha
+          from .Calculatenumbers import Calc
+          query = query.replace("calculate","")
+          query = query.replace("ela","")
+          Calc(query)
   
         # elif "search for a file" in query:
         #     speak("What file are you looking for?")
         #     query = process_speech()  
         #     search_and_open_file(query)
-        # elif "screenshot" in query:
-        #     import pyautogui 
-        #     im = pyautogui.screenshot()
-        #     im.save("ss.jpg")
-        # elif "translate" in query:
-        #     from Translator import translategl
-        #     query = query.replace("ela","")
-        #     query = query.replace("translate","")
-        #     translategl(query)
+        elif "screenshot" in query:
+            import pyautogui 
+            im = pyautogui.screenshot()
+            im.save("ss.jpg")
+        elif "translate" in query:
+            from .Translator import translategl
+            query = query.replace("ela","")
+            query = query.replace("translate","")
+            translategl(query)
         elif  'bye' in query or 'stop' in query:
              hour = int(datetime.datetime.now().hour)
              if hour >= 21 and hour < 6:
@@ -276,7 +346,11 @@ def perform_task(request):
              else:
                 speak('Have a good day !,')
              exit()
-        return redirect('/start')
+        context = {
+        'query': query,
+        
+         }
+        return render(request, 'ela/index.html', context)
     
     
 

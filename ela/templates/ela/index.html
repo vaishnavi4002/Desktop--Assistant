@@ -1,13 +1,32 @@
 {% extends "ela\_base.html" %}
 
 {% block content %}
-   <div class="main-content bg-cover bg-center h-screen bg-customColor">
+
   
+  <!-- Sidebar -->
+  <div id="docs-sidebar" class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200  pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700">
+    <div class="px-6 bg-slate-600  text-white text-center py-5 ">
+      <a class="flex-none   text-xl font-semibold " href="#" aria-label="Brand">Query History</a>
+    </div>
+    <nav class=" bg-slate-300 hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+        
+        <ul class="space-y-3">
+            {% if query_history %}
+                {% for history in query_history %}
+                    <li>{{ history.query_text }} - {{ history.timestamp }}</li>
+                    <hr>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </nav>
+  </div>
+  <!-- End Sidebar -->
+   <div class=" ml-40 main-content bg-cover bg-center h-screen bg-customColor">
+    
     <nav class=" border-gray-200 py-2.5 bg-transparent text-2xl ">
-      <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+      <div class=" mt-8 flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
           <a href="#" class="flex items-center">
-              <img src="https://www.svgrepo.com/show/499962/music.svg" class="h-6 mr-3 sm:h-9" alt="Landwind Logo">
-              <span class="self-center text-xl font-semibold whitespace-nowrap text-white">ELA</span>
+              
           </a>
           <div class="flex items-center lg:order-2">
               <div class="hidden mt-2 mr-4 sm:inline-block">
@@ -32,39 +51,53 @@
               <ul class="flex flex-col  mt-4 font-medium lg:flex-row lg:space-x-12 lg:mt-0 ">
                   <li>
                       <a href="/"
-                          class="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-white lg:p-0 dark:text-white"
+                          class="block py-2 pl-3 pr-4 text-white bg-slatetext-gray-400 rounded lg:bg-transparent lg:hover:text-gray-400 lg:text-white lg:p-0 dark:text-white"
                           aria-current="page">Home</a>
                   </li>
                   <li>
-                      <a href="#"
-                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">About  Ela</a>
+                      <a href="/aboutEla"
+                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">About  Ela</a>
                   </li>
                   <li>
                       <a href="#"
-                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Support us</a>
+                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Support us</a>
+                  </li>
+                  <li>
+                      <a href="/Features"
+                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Features</a>
                   </li>
                   <li>
                       <a href="#"
-                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Features</a>
+                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Contact Us</a>
                   </li>
                   <li>
                       <a href="#"
-                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Contact Us</a>
-                  </li>
-                  <li>
-                      <a href="#"
-                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Account</a>
+                          class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-400 lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent dark:border-white">Account</a>
                   </li>
               </ul>
           </div>
       </div>
   </nav>
 
+  <!-- Side Navigation -->
+
+
   <div class=" text-2xl my-20 text-center">
     <h2 class="text-white ">How may I help you today?</h2>
   </div>
   
-    <div class="container flex justify-center mt-40 mx-auto ">
+  <div class="container mt-5  mx-auto w-80 bg-slate-300 rounded-2xl ">
+    <div class="mx-auto rounded-2xl bg-slate-600 text-center text-xl text-white"><p >YOUR QUERY </p></div>
+    
+    <div class="card  py-10 w-80">
+        
+        <div class="card-body ">
+            <p class="card-text text-xl text-black text-center">{{ query }}</p>
+        </div>
+    </div>
+</div>
+
+    <div class="container flex justify-center mt-30 mx-auto ">
       <form  class="pt-20"  method="post">
           {% csrf_token %}
               <div class="pulse-ring"></div>
@@ -72,10 +105,15 @@
               
                 <button type="submit" name="task" value="perform_task" class="justify-center mx-auto">
                   <img class=" rounded-full justify-center mx-auto" type="submit" name="task" value="perform_task" style="width: 100px ;" src="https://lordicon.com/icons/wired/lineal/188-microphone-recording.gif" alt="">
-              </button>    
+              </button>  
+              
+              
       </form>
+      
      </div>
    </div>
-   
+
+
+      
 
 {% endblock content %}
